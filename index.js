@@ -9,10 +9,11 @@ const screenshot = 'geoserver.png';
 
 const user = process.env.GEOSEVER_USER || 'admin';
 const pwd = process.env.GEOSEVER_PWD || 'geoserver';
+const port = process.env.GEOSEVER_PORT || '8080';
 (async () => {
   const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
-  await page.goto('http://localhost:18080/geoserver/web/');
+  await page.goto('http://localhost:' + port + '/geoserver/web/');
   await page.type('#username', user);
   await page.type('#password', pwd);
   await page.keyboard.press('Enter');
