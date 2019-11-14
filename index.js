@@ -55,10 +55,10 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
     const credentailsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
     const authHeader = 'Basic ' + credentailsBase64;
     const headers = {'Authorization': authHeader};
-    reqOptions = {
+    const reqOptions = {
       method: 'GET',
       headers: headers
-    }
+    };
     fetch(geoserverBaseUrl + 'rest/workspaces.json', reqOptions)
       .then(res => res.json()) // expecting a json response
       .then(json => json.workspaces.workspace.map(ws => ws.name))
@@ -72,8 +72,8 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
         });
 
         if (wsNotFound.length > 0) {
-            console.error('Missing workspace(s):', wsNotFound.join(', '));
-            process.exit(1);
+          console.error('Missing workspace(s):', wsNotFound.join(', '));
+          process.exit(1);
         } else {
           console.info('✔ Found all expected workspaces in GeoServer');
         }
