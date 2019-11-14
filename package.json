@@ -17,5 +17,8 @@
   "license": "MIT",
   "devDependencies": {
     "puppeteer": "^1.19.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
   }
 }
