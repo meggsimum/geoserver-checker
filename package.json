@@ -1,7 +1,7 @@
 {
   "name": "geoserver-checker",
   "version": "0.1.0",
-  "description": "Pupetteer script to check if a GeoServer instance is running correctly",
+  "description": "Script to check if a GeoServer instance is running correctly",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -13,12 +13,11 @@
     "check",
     "test"
   ],
-  "author": "C. Mayer",
+  "author": "C. Mayer (meggsimum)",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
+    "node-fetch": "^2.6.0",
     "puppeteer": "^1.19.0"
   },
-  "dependencies": {
-    "node-fetch": "^2.6.0"
-  }
+  "devDependencies": {}
 }
