@@ -39,8 +39,14 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
   await page.waitForNavigation();
   await page.screenshot({ path: screenshot });
 
-  console.info('✔ Sucessfully logged in to GeoServer web interface.');
-  console.info('  Check screenshot after login: ', screenshot);
+  // check if login was scuccesfull by non existing error element in the UI
+  if (await page.$('.feedbackPanelERROR') !== null) {
+    console.info('✘ Login failed to GeoServer web interface.');
+    process.exit(1);
+  } else {
+    console.info('✔ Sucessfully logged in to GeoServer web interface.');
+    console.info('  Check screenshot after login: ', screenshot);
+  }
 
   if (process.env.GEOSERVER_WS) {
     const workspaces = process.env.GEOSERVER_WS.split(',');
