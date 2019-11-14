@@ -1,7 +1,10 @@
 /**
- * Logs into a GeoServer instance. Provide your username and password as
+ * Performs checks against a GeoServer instance.
+ * Provide your username and password as
  * environment variables when running the script, i.e:
- * `GEOSEVER_USER=myuser GEOSEVER_PWD=mypassword npm start`
+ * `GEOSEVER_USER=myuser GEOSEVER_PWD=mypassword npm start` or inject the
+ * URL to the GeoServer to test
+ * `GEOSEVER_BASEURL=http://localhost:9999/geoserver/ npm start`
  *
  */
 const puppeteer = require('puppeteer');
@@ -18,6 +21,10 @@ if (process.env.GEOSEVER_BASEURL) {
 
   geoserverBaseUrl = 'http://' + host + ':' + port + '/' + path + '/';
 }
+
+console.info('---------------------------------------------------------------');
+console.info('Checking GeoServer at: ', geoserverBaseUrl);
+console.info('---------------------------------------------------------------');
 
 const user = process.env.GEOSEVER_USER || 'admin';
 const pwd = process.env.GEOSEVER_PWD || 'geoserver';
