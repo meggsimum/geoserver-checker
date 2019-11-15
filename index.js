@@ -72,7 +72,7 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
         });
 
         if (wsNotFound.length > 0) {
-          console.error('Missing workspace(s):', wsNotFound.join(', '));
+          console.error('✘ Missing workspace(s):', wsNotFound.join(', '));
           process.exit(1);
         } else {
           console.info('✔ Found all expected workspaces in GeoServer');
