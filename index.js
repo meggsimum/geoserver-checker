@@ -19,7 +19,7 @@ if (process.env.GEOSEVER_BASEURL) {
   const port = process.env.GEOSEVER_PORT || '8080';
   const path = process.env.GEOSEVER_PATH || 'geoserver';
 
-  geoserverBaseUrl = 'http://' + host + ':' + port + '/' + path + '/';
+  geoserverBaseUrl = protocoll + '://' + host + ':' + port + '/' + path + '/';
 }
 
 console.info('---------------------------------------------------------------');
@@ -30,14 +30,18 @@ const user = process.env.GEOSEVER_USER || 'admin';
 const pwd = process.env.GEOSEVER_PWD || 'geoserver';
 
 (async () => {
-  const browser = await puppeteer.launch({headless: true});
+  const browser = await puppeteer.launch({
+    headless: true
+  });
   const page = await browser.newPage();
   await page.goto(geoserverBaseUrl + 'web');
   await page.type('#username', user);
   await page.type('#password', pwd);
   await page.keyboard.press('Enter');
   await page.waitForNavigation();
-  await page.screenshot({ path: screenshot });
+  await page.screenshot({
+    path: screenshot
+  });
 
   // check if login was scuccesfull by non existing error element in the UI
   if (await page.$('.feedbackPanelERROR') !== null) {
@@ -54,7 +58,9 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
 
     const credentailsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
     const authHeader = 'Basic ' + credentailsBase64;
-    const headers = {'Authorization': authHeader};
+    const headers = {
+      Authorization: authHeader
+    };
     const reqOptions = {
       method: 'GET',
       headers: headers
@@ -64,10 +70,10 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
       .then(json => json.workspaces.workspace.map(ws => ws.name))
       .then(wsName => {
         // check if all expected workspaces are existing
-        let wsNotFound = [];
+        const wsNotFound = [];
         workspaces.forEach((wsToCheck) => {
           if (!wsName.includes(wsToCheck)) {
-              wsNotFound.push(wsToCheck);
+            wsNotFound.push(wsToCheck);
           }
         });
 
