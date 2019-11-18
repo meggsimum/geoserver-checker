@@ -29,9 +29,13 @@ console.info('---------------------------------------------------------------');
 const user = process.env.GEOSEVER_USER || 'admin';
 const pwd = process.env.GEOSEVER_PWD || 'geoserver';
 
+// force other executable for chromium or chrome browser
+const chromeExecPath = process.env.CHROME_EXEC;
+
 (async () => {
   const browser = await puppeteer.launch({
-    headless: true
+    headless: true,
+    executablePath: chromeExecPath
   });
   const page = await browser.newPage();
   await page.goto(geoserverBaseUrl + 'web').catch(() => {
