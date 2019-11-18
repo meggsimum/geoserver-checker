@@ -35,7 +35,8 @@ const chromeExecPath = process.env.CHROME_EXEC;
 (async () => {
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: chromeExecPath
+    executablePath: chromeExecPath,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
   await page.goto(geoserverBaseUrl + 'web').catch(() => {
