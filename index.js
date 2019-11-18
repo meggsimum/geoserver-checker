@@ -34,7 +34,10 @@ const pwd = process.env.GEOSEVER_PWD || 'geoserver';
     headless: true
   });
   const page = await browser.newPage();
-  await page.goto(geoserverBaseUrl + 'web');
+  await page.goto(geoserverBaseUrl + 'web').catch(() => {
+    console.info('✘ Given URL could not be opened:', geoserverBaseUrl);
+    process.exit(1);
+  });
   await page.type('#username', user);
   await page.type('#password', pwd);
   await page.keyboard.press('Enter');
