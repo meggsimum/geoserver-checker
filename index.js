@@ -30,6 +30,16 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
+
+  // check for failed page.goto calls, e.g. HTTP 404
+  page.on('response', response => {
+    if (response.status() >= 400) {
+      console.error('✘ Given URL', response.url(),
+        'returned non 200 response code:', response.status());
+      process.exit(1);
+    }
+  });
+
   await page.goto(geoserverBaseUrl + 'web').catch(() => {
     console.error('✘ Given URL could not be opened:', geoserverBaseUrl);
     process.exit(1);
