@@ -61,7 +61,7 @@ const chromeExecPath = process.env.CHROME_EXEC;
   }
 
   if (process.env.GEOSERVER_WS) {
-    const workspaces = process.env.GEOSERVER_WS.split(',');
+    const expectedWs = process.env.GEOSERVER_WS.split(',');
     const fetch = require('node-fetch');
 
     const credentailsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
@@ -75,15 +75,22 @@ const chromeExecPath = process.env.CHROME_EXEC;
     };
     fetch(geoserverBaseUrl + 'rest/workspaces.json', reqOptions)
       .then(res => res.json()) // expecting a json response
-      .then(json => json.workspaces.workspace.map(ws => ws.name))
-      .then(wsName => {
+      .then(json => {
+        if (json.workspaces.workspace) {
+          return json.workspaces.workspace.map(ws => ws.name)
+        }
+        return [];
+      })
+      .then(wsNames => {
         // check if all expected workspaces are existing
         const wsNotFound = [];
-        workspaces.forEach((wsToCheck) => {
-          if (!wsName.includes(wsToCheck)) {
-            wsNotFound.push(wsToCheck);
-          }
-        });
+        if (wsNames) {
+          expectedWs.forEach((wsToCheck) => {
+            if (!wsNames.includes(wsToCheck)) {
+              wsNotFound.push(wsToCheck);
+            }
+          });
+        }
 
         if (wsNotFound.length > 0) {
           console.error('✘ Missing workspace(s):', wsNotFound.join(', '));
