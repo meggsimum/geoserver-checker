@@ -1,6 +1,6 @@
 {
   "name": "geoserver-checker",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Script to check if a GeoServer instance is running correctly",
   "repository": {
     "type": "git",
