@@ -31,7 +31,7 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
   });
   const page = await browser.newPage();
   await page.goto(geoserverBaseUrl + 'web').catch(() => {
-    console.info('✘ Given URL could not be opened:', geoserverBaseUrl);
+    console.error('✘ Given URL could not be opened:', geoserverBaseUrl);
     process.exit(1);
   });
   await page.type('#username', user);
@@ -44,7 +44,7 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
 
   // check if login was scuccesfull by non existing error element in the UI
   if (await page.$('.feedbackPanelERROR') !== null) {
-    console.info('✘ Login failed to GeoServer web interface.');
+    console.error('✘ Login failed to GeoServer web interface.');
     process.exit(1);
   } else {
     console.info('✔ Sucessfully logged in to GeoServer web interface.');
