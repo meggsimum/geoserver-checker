@@ -17,7 +17,7 @@ Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
 the web inteface with GeoServer default credentials:
 
 ```bash
-GEOSEVER_BASEURL=http://localhost:9999/geoserver/ \
+GS_CHECKER_BASEURL=http://localhost:9999/geoserver/ \
 npm start
 ```
 
@@ -25,9 +25,9 @@ Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
 the web inteface with the given credentials:
 
 ```bash
-GEOSEVER_BASEURL=http://localhost:9999/geoserver/ \
-GEOSEVER_USER=kalle \
-GEOSEVER_PWD=123456 \
+GS_CHECKER_BASEURL=http://localhost:9999/geoserver/ \
+GS_CHECKER_USER=kalle \
+GS_CHECKER_PWD=123456 \
 npm start
 ```
 Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
@@ -35,9 +35,9 @@ the web inteface with the given credentials and test if the given workspaces
 exists in the GeoServer instance:
 
 ```bash
-GEOSEVER_BASEURL='http://localhost:9999/geoserver/' \
-GEOSEVER_USER=kalle \
-GEOSEVER_PWD=123456 \
-GEOSERVER_WS='ws_1,ws_2,ws_foo,ws_bar' \
+GS_CHECKER_BASEURL='http://localhost:9999/geoserver/' \
+GS_CHECKER_USER=kalle \
+GS_CHECKER_PWD=123456 \
+GS_CHECKER_WS='ws_1,ws_2,ws_foo,ws_bar' \
 npm start
 ```

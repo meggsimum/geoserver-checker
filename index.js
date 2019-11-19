@@ -2,35 +2,26 @@
  * Performs checks against a GeoServer instance.
  * Provide your username and password as
  * environment variables when running the script, i.e:
- * `GEOSEVER_USER=myuser GEOSEVER_PWD=mypassword npm start` or inject the
+ * `GS_CHECKER_USER=myuser GS_CHECKER_PWD=mypassword npm start` or inject the
  * URL to the GeoServer to test
- * `GEOSEVER_BASEURL=http://localhost:9999/geoserver/ npm start`
+ * `GS_CHECKER_BASEURL=http://localhost:9999/geoserver/ npm start`
  *
  */
 const puppeteer = require('puppeteer');
 const screenshot = 'geoserver.png';
 
-let geoserverBaseUrl;
-if (process.env.GEOSEVER_BASEURL) {
-  geoserverBaseUrl = process.env.GEOSEVER_BASEURL;
-} else {
-  const protocoll = process.env.GEOSEVER_PROTOCOLL || 'http';
-  const host = process.env.GEOSEVER_HOST || 'localhost';
-  const port = process.env.GEOSEVER_PORT || '8080';
-  const path = process.env.GEOSEVER_PATH || 'geoserver';
-
-  geoserverBaseUrl = protocoll + '://' + host + ':' + port + '/' + path + '/';
-}
+const geoserverBaseUrl =
+  process.env.GS_CHECKER_BASEURL || 'http://localhost:8080/geoserver';
 
 console.info('---------------------------------------------------------------');
 console.info('Checking GeoServer at: ', geoserverBaseUrl);
 console.info('---------------------------------------------------------------');
 
-const user = process.env.GEOSEVER_USER || 'admin';
-const pwd = process.env.GEOSEVER_PWD || 'geoserver';
+const user = process.env.GS_CHECKER_USER || 'admin';
+const pwd = process.env.GS_CHECKER_PWD || 'geoserver';
 
 // force other executable for chromium or chrome browser
-const chromeExecPath = process.env.CHROME_EXEC;
+const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -60,8 +51,9 @@ const chromeExecPath = process.env.CHROME_EXEC;
     console.info('  Check screenshot after login: ', screenshot);
   }
 
-  if (process.env.GEOSERVER_WS) {
-    const expectedWs = process.env.GEOSERVER_WS.split(',');
+  // check if expected workspaces are present (via GeoServer REST API)
+  if (process.env.GS_CHECKER_WS) {
+    const expectedWs = process.env.GS_CHECKER_WS.split(',');
     const fetch = require('node-fetch');
 
     const credentailsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
