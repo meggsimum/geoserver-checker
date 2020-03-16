@@ -2,7 +2,17 @@
 
 Script to check if a [GeoServer](http://geoserver.org) instance is up and running correctly.
 
-## Use the script
+## Use as Docker Container
+
+```bash
+docker run \
+  -e GS_CHECKER_BASEURL=http://myhost:8080/geoserver/ \
+  -e GS_CHECKER_USER=admin \
+  -e GS_CHECKER_PWD=geoserver \
+  meggsimum/geoserver-checker
+```
+
+## Use node Script directly
 
 ### Prerequisites
 
