@@ -69,8 +69,8 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
     const expectedWs = process.env.GS_CHECKER_WS.split(',');
     const fetch = require('node-fetch');
 
-    const credentailsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
-    const authHeader = 'Basic ' + credentailsBase64;
+    const credentialsBase64 = Buffer.from(user + ':' + pwd).toString('base64');
+    const authHeader = 'Basic ' + credentialsBase64;
     const headers = {
       Authorization: authHeader
     };
