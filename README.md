@@ -2,6 +2,16 @@
 
 Script to check if a [GeoServer](http://geoserver.org) instance is up and running correctly.
 
+## Relevant ENV VARs
+
+```
+  - GS_CHECKER_BASEURL (defaults to 'http://localhost:8080/geoserver')
+  - GS_CHECKER_USER (defaults to 'admin')
+  - GS_CHECKER_PWD (defaults to 'geoserver')
+  - GS_CHECKER_WS
+  - GS_CHECKER_CHROME_EXEC
+```
+
 ## Use as Docker Container
 
 ```bash
