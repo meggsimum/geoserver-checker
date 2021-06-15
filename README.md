@@ -10,6 +10,7 @@ Script to check if a [GeoServer](http://geoserver.org) instance is up and runnin
   - GS_CHECKER_PWD (defaults to 'geoserver')
   - GS_CHECKER_WS
   - GS_CHECKER_CHROME_EXEC
+  - GS_CHECKER_NO_LOGIN (defaults to false)
 ```
 
 ## Use as Docker Container

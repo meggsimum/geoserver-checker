@@ -19,6 +19,8 @@ console.info('---------------------------------------------------------------');
 
 const user = process.env.GS_CHECKER_USER || 'admin';
 const pwd = process.env.GS_CHECKER_PWD || 'geoserver';
+// flag to skip testing parts, which need authentication
+const noLogin = process.env.GS_CHECKER_NO_LOGIN === 'true';
 
 // force other executable for chromium or chrome browser
 const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
@@ -45,6 +47,12 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
   } catch (error) {
     console.error('✘ Given URL could not be opened:', geoserverBaseUrl);
     process.exit(1);
+  }
+
+  if (noLogin) {
+    console.info('Done... skip parts needing authentication due to ' +
+        'flag GS_CHECKER_NO_LOGIN=true');
+    process.exit(0);
   }
 
   await page.type('#username', user);
