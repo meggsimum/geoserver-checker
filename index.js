@@ -40,10 +40,13 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
     }
   });
 
-  await page.goto(geoserverBaseUrl + 'web').catch(() => {
+  try {
+    await page.goto(geoserverBaseUrl + 'web');
+  } catch (error) {
     console.error('✘ Given URL could not be opened:', geoserverBaseUrl);
     process.exit(1);
-  });
+  }
+
   await page.type('#username', user);
   await page.type('#password', pwd);
   await page.keyboard.press('Enter');
@@ -52,7 +55,7 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
     path: screenshot
   });
 
-  // check if login was scuccesfull by non existing error element in the UI
+  // check if login was successful by non existing error element in the UI
   if (await page.$('.feedbackPanelERROR') !== null) {
     console.error('✘ Login failed to GeoServer web interface.');
     process.exit(1);
@@ -75,32 +78,31 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
       method: 'GET',
       headers: headers
     };
-    fetch(geoserverBaseUrl + 'rest/workspaces.json', reqOptions)
-      .then(res => res.json()) // expecting a json response
-      .then(json => {
-        if (json.workspaces.workspace) {
-          return json.workspaces.workspace.map(ws => ws.name)
-        }
-        return [];
-      })
-      .then(wsNames => {
-        // check if all expected workspaces are existing
-        const wsNotFound = [];
-        if (wsNames) {
-          expectedWs.forEach((wsToCheck) => {
-            if (!wsNames.includes(wsToCheck)) {
-              wsNotFound.push(wsToCheck);
-            }
-          });
-        }
 
-        if (wsNotFound.length > 0) {
-          console.error('✘ Missing workspace(s):', wsNotFound.join(', '));
-          process.exit(1);
-        } else {
-          console.info('✔ Found all expected workspaces in GeoServer');
+    const wsUrl = geoserverBaseUrl + 'rest/workspaces.json';
+    const res = await fetch(wsUrl, reqOptions);
+    const json = await res.json();
+
+    let wsNames = [];
+    if (json.workspaces.workspace) {
+      wsNames = json.workspaces.workspace.map(ws => ws.name)
+    }
+    // check if all expected workspaces are existing
+    const wsNotFound = [];
+    if (wsNames) {
+      expectedWs.forEach((wsToCheck) => {
+        if (!wsNames.includes(wsToCheck)) {
+          wsNotFound.push(wsToCheck);
         }
       });
+    }
+
+    if (wsNotFound.length > 0) {
+      console.error('✘ Missing workspace(s):', wsNotFound.join(', '));
+      process.exit(1);
+    } else {
+      console.info('✔ Found all expected workspaces in GeoServer');
+    }
   }
 
   browser.close();
