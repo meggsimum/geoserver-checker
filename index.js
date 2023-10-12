@@ -27,7 +27,7 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: 'new',
     executablePath: chromeExecPath,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });

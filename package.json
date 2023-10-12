@@ -21,10 +21,10 @@
   "author": "C. Mayer (meggsimum)",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.0",
-    "puppeteer": "^10.0.0"
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^21.3.8"
   },
   "devDependencies": {
-    "eslint": "^7.28.0"
+    "eslint": "^8.51.0"
   }
 }
