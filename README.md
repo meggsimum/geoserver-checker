@@ -7,7 +7,7 @@ Script to check if a [GeoServer](http://geoserver.org) instance is up and runnin
 
 ## Relevant ENV VARs
 
-```
+``` bash
   - GS_CHECKER_BASEURL (defaults to 'http://localhost:8080/geoserver')
   - GS_CHECKER_USER (defaults to 'admin')
   - GS_CHECKER_PWD (defaults to 'geoserver')
@@ -30,14 +30,14 @@ docker run \
 
 ### Prerequisites
 
-  - Node.js and npm have to be installed on your system
-  - Clone or download this repository
-  - Open a terminal and navigate to the checkout / download
-  - Install dependencies with `npm install`
+- Node.js and npm have to be installed on your system
+- Clone or download this repository
+- Open a terminal and navigate to the checkout / download
+- Install dependencies with `npm install`
 
 ### Execute the script
 
-Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
+Check a GeoServer at <http://localhost:9999/geoserver/> by performing a login to
 the web inteface with GeoServer default credentials:
 
 ```bash
@@ -45,7 +45,7 @@ GS_CHECKER_BASEURL=http://localhost:9999/geoserver/ \
 npm start
 ```
 
-Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
+Check a GeoServer at <http://localhost:9999/geoserver/> by performing a login to
 the web inteface with the given credentials:
 
 ```bash
@@ -54,7 +54,8 @@ GS_CHECKER_USER=kalle \
 GS_CHECKER_PWD=123456 \
 npm start
 ```
-Check a GeoServer at http://localhost:9999/geoserver/ by performing a login to
+
+Check a GeoServer at <http://localhost:9999/geoserver/> by performing a login to
 the web inteface with the given credentials and test if the given workspaces
 exists in the GeoServer instance:
 
