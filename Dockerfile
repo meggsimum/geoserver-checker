@@ -1,4 +1,4 @@
-FROM node:13-alpine
+FROM node:16-alpine
 
 ENV GS_CHECKER_BASEURL=$GS_CHECKER_BASEURL
 ENV GS_CHECKER_USER=$GS_CHECKER_USER
@@ -13,8 +13,6 @@ RUN set -x \
     && apk update \
     && apk upgrade \
     && apk add --no-cache \
-    udev \
-    ttf-freefont \
     chromium
 
 WORKDIR /opt
