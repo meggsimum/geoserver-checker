@@ -9,5 +9,8 @@ updates:
     directory: "/" # location of package manifests
     schedule:
       interval: "weekly"
-      # Check for npm updates on Sundays
+      # Check for npm updates on Wednesdays
       day: "wednesday"
+      time: "04:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 10
