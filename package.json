@@ -1,6 +1,6 @@
 {
   "name": "geoserver-checker",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Script to check if a GeoServer instance is running correctly",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   },
   "keywords": [
     "GeoServer",
-    "pupetteer",
+    "puppeteer",
     "check",
     "test"
   ],
