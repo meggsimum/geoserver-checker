@@ -2,6 +2,9 @@
 
 Script to check if a [GeoServer](http://geoserver.org) instance is up and running correctly.
 
+![GitHub Release Date](https://img.shields.io/github/release-date/meggsimum/geoserver-checker)
+![GitHub last commit](https://img.shields.io/github/last-commit/meggsimum/geoserver-checker)
+
 ## Relevant ENV VARs
 
 ```
