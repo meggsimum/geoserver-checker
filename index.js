@@ -68,7 +68,7 @@ const chromeExecPath = process.env.GS_CHECKER_CHROME_EXEC;
     console.error('✘ Login failed to GeoServer web interface.');
     process.exit(1);
   } else {
-    console.info('✔ Sucessfully logged in to GeoServer web interface.');
+    console.info('✔ Successfully logged in to GeoServer web interface.');
     console.info('  Check screenshot after login: ', screenshot);
   }
 
